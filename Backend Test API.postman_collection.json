@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "6ee11310-9ae8-4d81-ad67-3d451effdd9f",
+		"name": "Backend Test API",
+		"description": "Postman collection for testing Backend Test API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33350117",
+		"_collection_link": "https://developerkencana.postman.co/workspace/API-ERP-KENCANA~7636127e-87e2-4fbe-8257-d90ccd0bb6df/collection/33350117-6ee11310-9ae8-4d81-ad67-3d451effdd9f?action=share&source=collection_link&creator=33350117"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login with Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login/email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"email"
+							]
+						},
+						"description": "Login using email and password to obtain JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Login with Google",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"googleToken\": \"your-google-token-here\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login/google",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"google"
+							]
+						},
+						"description": "Login using Google OAuth token to obtain JWT token. Replace 'your-google-token-here' with a valid Google ID token."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Management",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTUyMjA0MSwiZXhwIjoxNzQ5NTI1NjQxfQ.Vg2yIqKqfvchJ6Z-RzsLUqHUo4IdTsA0luolaP6BUXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nama_produk\": \"combed 20s\", \"harga_jual\": 12000}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						},
+						"description": "Create a new product with a unique product code (e.g., PROD-011). Requires JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Sync External Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTUyMjA0MSwiZXhwIjoxNzQ5NTI1NjQxfQ.Vg2yIqKqfvchJ6Z-RzsLUqHUo4IdTsA0luolaP6BUXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sync-products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sync-products"
+							]
+						},
+						"description": "Synchronize products from an external API. Requires JWT token. Note: External API (https://api.external.com/products) is a placeholder."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scheduling",
+			"item": [
+				{
+					"name": "Schedule Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Test notification\",\n    \"scheduleTime\": \"2025-06-10T10:00:00Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/schedule",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"schedule"
+							]
+						},
+						"description": "Schedule a notification at a specific time. Requires JWT token. Adjust 'scheduleTime' to a future UTC timestamp."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer_id\": 1,\n    \"products\": [\n        {\n            \"product_id\": 1,\n            \"quantity\": 2\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						},
+						"description": "Create a new order with multiple products. Requires JWT token. Ensure customer_id and product_id exist in the database."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Get Top Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/top-customers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"top-customers"
+							]
+						},
+						"description": "Retrieve a report of the top 10 customers by total purchase amount. Requires JWT token."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0OTUyMjA0MSwiZXhwIjoxNzQ5NTI1NjQxfQ.Vg2yIqKqfvchJ6Z-RzsLUqHUo4IdTsA0luolaP6BUXk"
+		}
+	]
+}

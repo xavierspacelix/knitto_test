@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const dataRoutes_1 = __importDefault(require("./routes/dataRoutes"));
+const integrationRoutes_1 = __importDefault(require("./routes/integrationRoutes"));
+const scheduleRoutes_1 = __importDefault(require("./routes/scheduleRoutes"));
+const transactionRoutes_1 = __importDefault(require("./routes/transactionRoutes"));
+const reportRoutes_1 = __importDefault(require("./routes/reportRoutes"));
+const errorHandler_1 = require("./middleware/errorHandler");
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use('/api/auth', authRoutes_1.default);
+app.use('/api', dataRoutes_1.default);
+app.use('/api', integrationRoutes_1.default);
+app.use('/api', scheduleRoutes_1.default);
+app.use('/api', transactionRoutes_1.default);
+app.use('/api', reportRoutes_1.default);
+app.use(errorHandler_1.errorHandler);
+exports.default = app;
